@@ -22,7 +22,7 @@ async function handleRequest(request) {
                 }
             )
         }
-        return await addRedirection(data)
+        return await addRedirection(data, requestUrl)
     } else
         return await redirect(path)
 }
@@ -45,7 +45,7 @@ async function redirect(shortName) {
         )
 }
 
-async function addRedirection(data) {
+async function addRedirection(data, requestUrl) {
     if (data.shortCode && data.target) {
         const existingUrl = await db.get(data.shortCode)
         if (!existingUrl) {
